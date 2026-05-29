@@ -20,6 +20,17 @@ if (file_exists($controllerFile)) {
 
     // 4. Comprobar si la clase existe dentro de ese archivo
     if (class_exists($controllerClassName)) {
+
+        // Definimos qué páginas son públicas (donde se puede entrar sin estar logueado)
+        $paginasPublicas = ['Auth']; 
+
+        // Si el controlador NO es público y no hay sesión iniciada, mandamos al login
+        if (!in_array($controllerName, $paginasPublicas) && !isset($_SESSION['user_id'])) {
+        
+            header("Location: index.php?controller=Auth&action=login");
+            exit();
+
+        }
         
         // Instanciamos el controlador (ej: $controller = new PodcastController();)
         $controller = new $controllerClassName();
@@ -47,6 +58,6 @@ if (file_exists($controllerFile)) {
 
     // Error 404 casero: El archivo no existe
     die("Error: El controlador '$controllerClassName' no existe en la carpeta controllers.");
-    
+
 }
 ?>
