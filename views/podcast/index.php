@@ -1,3 +1,8 @@
+<?php
+
+$userName = $_SESSION['user_name'] ?? '';
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +11,7 @@
 </head>
 <body>
     <header style="background-color: #f4f4f4; padding: 10px; margin-bottom: 20px;">
-        <h1>Bienvenido, <?= htmlspecialchars($_SESSION['user_name']) ?></h1>
+        <h1>Bienvenido, <?= htmlspecialchars($userName) ?></h1>
         <a href="index.php?controller=Auth&action=logout">Cerrar Sesión</a>
     </header>
 
