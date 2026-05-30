@@ -17,8 +17,8 @@ class PodcastController {
         $podcasts = $this->podcastModel->getAll();
 
         // 2. Cargamos la vista pasándole los datos (mañana crearemos este archivo)
-        require_once 'views/podcasts/index.php';
-        
+        require_once 'views/podcast/index.php';
+
     }
 }
 ?>
