@@ -78,3 +78,36 @@ REFERENCES tbl_lista(id_lista) ON DELETE CASCADE;
 ALTER TABLE tbl_lista_episodio
 ADD CONSTRAINT fk_lista_ep_episodio FOREIGN KEY (fk_id_episodio)
 REFERENCES tbl_episodio(id_episodio) ON DELETE CASCADE;
+
+
+
+
+-- 1. Insertar Canales de Podcast (Catálogo principal)
+INSERT INTO tbl_podcast (titulo, creador, descripcion, categoria, portada) VALUES
+('Crímenes Imperfectos', 'Carlos Ríos', 'Análisis detallado de los casos policiales más extraños y sin resolver de la última década.', 'True Crime', 'default.png'),
+('Tech sin Filtros', 'Ana Gómez', 'Repaso semanal al mundo de la tecnología, inteligencia artificial y desarrollo web.', 'Tecnología', 'default.png'),
+('Risas en Lata', 'Dani Mateo', 'Monólogos, entrevistas y mucho humor para desconectar de la rutina diaria.', 'Humor', 'default.png'),
+('Historia Oculta', 'Laura Salas', 'Descubre los pasajes de la historia que no te contaron en el colegio.', 'Historia', 'default.png'),
+('Mente Sana', 'Dra. Elena Ruiz', 'Consejos, psicología y meditación para afrontar el estrés del día a día.', 'Salud y Bienestar', 'default.png');
+
+-- 2. Insertar Episodios 
+-- (Asumiendo que los IDs generados arriba serán 1, 2, 3, 4 y 5)
+-- Nota: Si tu tabla de episodios tiene nombres de columnas ligeramente distintos, ajústalos.
+INSERT INTO tbl_episodio (fk_id_podcast, titulo, duracion, fecha_pub, archivo_audio) VALUES
+-- Episodios para "Crímenes Imperfectos" (ID 1)
+(1, 'El misterio del faro', '00:45:00', '2023-10-01', 'audio_test.mp3'),
+(1, 'El robo al banco central', '00:52:00', '2023-10-08', 'audio_test.mp3'),
+
+-- Episodios para "Tech sin Filtros" (ID 2)
+(2, '¿Nos quitará la IA el trabajo?', '01:10:00', '2023-10-05', 'audio_test.mp3'),
+(2, 'Novedades de PHP 8.3', '00:35:00', '2023-10-12', 'audio_test.mp3'),
+(2, 'El fin de las cookies', '00:48:00', '2023-10-19', 'audio_test.mp3'),
+
+-- Episodios para "Risas en Lata" (ID 3)
+(3, 'Entrevista a Berto Romero', '01:05:00', '2023-09-20', 'audio_test.mp3'),
+
+-- Episodios para "Historia Oculta" (ID 4)
+(4, 'Los secretos de las Pirámides', '00:58:00', '2023-09-25', 'audio_test.mp3'),
+
+-- Episodios para "Mente Sana" (ID 5)
+(5, 'Aprender a decir NO', '00:30:00', '2023-10-22', 'audio_test.mp3');
