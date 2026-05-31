@@ -52,22 +52,29 @@ class PodcastController {
     }
 
     public function guardar() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $titulo = $_POST['titulo'];
-            $creador = $_POST['creador'];
-            $descripcion = $_POST['descripcion'];
-            $categoria = $_POST['categoria'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            // Por ahora guardamos el nombre de la imagen, luego gestionaremos la subida
-            $portada = $_POST['portada']; 
+        // 1. Sanitizamos los datos (limpiamos espacios)
+        $titulo = trim($_POST['titulo'] ?? '');
+        $creador = trim($_POST['creador'] ?? '');
+        $descripcion = trim($_POST['descripcion'] ?? '');
+        $categoria = trim($_POST['categoria'] ?? '');
+        $portada = trim($_POST['portada'] ?? '');
 
-            $podcast = new Podcast();
-            $podcast->guardar($titulo, $creador, $descripcion, $categoria, $portada);
-
-            // Redirigimos al catálogo tras guardar
-            header("Location: index.php?controller=Podcast&action=index");
-            exit();
+        // 2. Validación: ¿Está todo vacío?
+        if (empty($titulo) || empty($creador) || empty($descripcion) || empty($categoria) || empty($portada)) {
+            $error = "Todos los campos son obligatorios. Por favor, rellénalos todos.";
+            require 'views/podcast/crear.php'; // Volvemos al formulario con el mensaje de error
+            return;
         }
+
+        // 3. Si todo está bien, guardamos
+        $podcast = new Podcast();
+        $podcast->guardar($titulo, $creador, $descripcion, $categoria, $portada);
+
+        header("Location: index.php?controller=Podcast&action=index");
+        exit();
     }
+}
 }
 ?>
