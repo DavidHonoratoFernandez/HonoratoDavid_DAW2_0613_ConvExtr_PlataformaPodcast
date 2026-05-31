@@ -14,7 +14,9 @@ $userName = $_SESSION['user_name'] ?? '';
     <header class="cabecera-principal">
         <h1>Bienvenido, <?= htmlspecialchars($userName) ?></h1>
         <div class="acciones-cabecera">
-            <a href="index.php?controller=Podcast&action=crear" class="boton boton-pequeno">+ Nuevo Podcast</a>
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                <a href="index.php?controller=Admin&action=index" class="boton boton-pequeno boton-oro">Panel Admin</a>
+            <?php endif; ?>
             <a href="index.php?controller=Auth&action=logout" class="enlace-logout">Cerrar Sesión</a>
         </div>
     </header>

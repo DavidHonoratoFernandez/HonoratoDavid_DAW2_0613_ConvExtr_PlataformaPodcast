@@ -2,49 +2,45 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Nuevo Podcast - Admin</title>
+    <title>Editar Podcast - Admin</title>
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
     <div class="contenedor contenedor-auth">
         <div class="tarjeta tarjeta-auth">
-            <h2>Publicar nuevo Podcast</h2>
+            <h2>Editar Podcast</h2>
             
-            <?php if (isset($error)): ?>
-                <div class="mensaje-error">
-                    <?= htmlspecialchars($error) ?>
-                </div>
-            <?php endif; ?>
-            
-            <form action="index.php?controller=Podcast&action=guardar" method="POST" class="formulario-auth grid-formulario">
+            <form action="index.php?controller=Podcast&action=actualizar" method="POST" class="formulario-auth grid-formulario">
+                <input type="hidden" name="id_podcast" value="<?= $podcast['id_podcast'] ?>">
+                
                 <div class="grupo-input">
                     <label>Título</label>
-                    <input type="text" name="titulo" class="input-auth">
+                    <input type="text" name="titulo" class="input-auth" value="<?= htmlspecialchars($podcast['titulo']) ?>">
                 </div>
 
                 <div class="grupo-input">
                     <label>Creador</label>
-                    <input type="text" name="creador" class="input-auth">
+                    <input type="text" name="creador" class="input-auth" value="<?= htmlspecialchars($podcast['creador']) ?>">
                 </div>
 
                 <div class="grupo-input">
                     <label>Categoría</label>
-                    <input type="text" name="categoria" class="input-auth">
+                    <input type="text" name="categoria" class="input-auth" value="<?= htmlspecialchars($podcast['categoria']) ?>">
                 </div>
 
                 <div class="grupo-input">
                     <label>URL Portada</label>
-                    <input type="text" name="portada" class="input-auth">
+                    <input type="text" name="portada" class="input-auth" value="<?= htmlspecialchars($podcast['portada']) ?>">
                 </div>
 
                 <div class="grupo-input full-width">
                     <label>Descripción</label>
-                    <textarea name="descripcion" class="input-auth" rows="4"></textarea>
+                    <textarea name="descripcion" class="input-auth" rows="4" required><?= htmlspecialchars($podcast['descripcion']) ?></textarea>
                 </div>
 
                 <div class="grupo-input full-width acciones-cabecera">
-                    <button type="submit" class="boton full-width">Guardar Podcast</button>
                     <a href="index.php?controller=Admin&action=index" class="boton-secundario full-width">Cancelar</a>
+                    <button type="submit" class="boton full-width">Actualizar Podcast</button>
                 </div>
             </form>
         </div>

@@ -328,6 +328,86 @@ audio {
     opacity: 0.8;
 }
 
+/* --- PANEL DE ADMINISTRACIÓN --- */
+.menu-interno-admin {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.panel-gestion {
+    background: var(--fondo-tarjeta);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--borde-tarjeta);
+}
+
+.cabecera-gestion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.cabecera-gestion h2 {
+    margin: 0;
+}
+
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabla-admin thead tr {
+    border-bottom: 2px solid var(--borde-tarjeta);
+}
+
+.tabla-admin th {
+    padding: 0.75rem;
+    color: var(--texto-secundario);
+}
+
+.tabla-admin tbody tr {
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.tabla-admin td {
+    padding: 0.75rem;
+}
+
+.alinear-derecha {
+    text-align: right;
+}
+
+.texto-bold {
+    font-weight: bold;
+}
+
+.enlace-eliminar {
+    color: #ef4444;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.enlace-eliminar:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Botón especial para entrar al admin */
+.boton-oro {
+    background: #fbbf24;
+    color: black;
+    font-weight: bold;
+}
+
+.boton-oro:hover {
+    background: #f59e0b;
+}
+
 @media (max-width: 600px) {
     .grid-formulario {
         grid-template-columns: 1fr;
