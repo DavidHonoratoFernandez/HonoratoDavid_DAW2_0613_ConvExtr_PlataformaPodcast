@@ -1,29 +1,28 @@
+<?php
+/** @var array $episodio */
+/** @var array[] $podcasts */
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Nuevo Episodio - Admin</title>
+    <title>Editar Episodio - Admin</title>
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
     <div class="contenedor contenedor-auth">
         <div class="tarjeta tarjeta-auth">
-            <h2>Publicar nuevo Episodio</h2>
+            <h2>Editar Episodio</h2>
             
-            <?php if (isset($error)): ?>
-                <div class="mensaje-error">
-                    <?= htmlspecialchars($error) ?>
-                </div>
-            <?php endif; ?>
-            
-            <form action="index.php?controller=Episodio&action=guardar" method="POST" class="formulario-auth grid-formulario">
+            <form action="index.php?controller=Episodio&action=actualizar" method="POST" class="formulario-auth grid-formulario">
+                <input type="hidden" name="id_episodio" value="<?= $episodio['id_episodio'] ?>">
                 
                 <div class="grupo-input full-width">
                     <label>Podcast al que pertenece</label>
                     <select name="fk_id_podcast" class="input-auth">
                         <option value="">-- Selecciona un Podcast --</option>
                         <?php foreach ($podcasts as $podcast): ?>
-                            <option value="<?= $podcast['id_podcast'] ?>">
+                            <option value="<?= $podcast['id_podcast'] ?>" <?= ($podcast['id_podcast'] == $episodio['fk_id_podcast']) ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($podcast['titulo']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -32,27 +31,27 @@
 
                 <div class="grupo-input full-width">
                     <label>Título del Episodio</label>
-                    <input type="text" name="titulo" class="input-auth">
+                    <input type="text" name="titulo" class="input-auth" value="<?= htmlspecialchars($episodio['titulo']) ?>">
                 </div>
 
                 <div class="grupo-input">
                     <label>Duración (HH:MM:SS)</label>
-                    <input type="time" step="1" name="duracion" class="input-auth">
+                    <input type="time" step="1" name="duracion" class="input-auth" value="<?= htmlspecialchars($episodio['duracion']) ?>">
                 </div>
 
                 <div class="grupo-input">
                     <label>Fecha de Publicación</label>
-                    <input type="date" name="fecha_pub" class="input-auth">
+                    <input type="date" name="fecha_pub" class="input-auth" value="<?= htmlspecialchars($episodio['fecha_pub']) ?>">
                 </div>
 
                 <div class="grupo-input full-width">
                     <label>URL del Archivo de Audio</label>
-                    <input type="url" name="archivo_audio" class="input-auth" placeholder="https://ejemplo.com/audio.mp3">
+                    <input type="file" name="archivo_audio" class="input-auth" value="<?= htmlspecialchars($episodio['archivo_audio']) ?>">
                 </div>
 
                 <div class="grupo-input full-width acciones-cabecera">
+                    <button type="submit" class="boton full-width">Actualizar Episodio</button>
                     <a href="index.php?controller=Admin&action=episodios" class="boton-secundario full-width">Cancelar</a>
-                    <button type="submit" class="boton full-width">Guardar Episodio</button>
                 </div>
             </form>
         </div>
