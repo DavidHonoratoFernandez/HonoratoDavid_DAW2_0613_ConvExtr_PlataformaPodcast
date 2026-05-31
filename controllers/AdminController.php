@@ -33,5 +33,24 @@ class AdminController {
         // Apuntamos a tu nueva estructura de carpetas
         require_once 'views/admin/episodio/index.php';
     }
+
+    public function usuarios() {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+            header("Location: index.php");
+            exit();
+        }
+        
+        // Asumiendo que tu tabla se llama tbl_usuario. 
+        // Usamos la conexión directamente para ir rápidos.
+        require_once 'config/conexion.php';
+        $db = new Database();
+        $conn = $db->getConnection();
+        
+        $stmt = $conn->query("SELECT id, name, email, rol FROM users ORDER BY id DESC");
+        $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Apuntamos a la nueva carpeta que vas a crear
+        require_once 'views/admin/usuario/index.php';
+    }
 }
 ?>

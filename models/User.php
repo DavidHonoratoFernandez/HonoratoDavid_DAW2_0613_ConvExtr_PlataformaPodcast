@@ -69,5 +69,70 @@ class User {
         // Si el correo no existe o la contraseña está mal, devolvemos false
         return false; 
     }
+
+
+    
+    // --- FUNCIONES DE ADMINISTRACIÓN (CRUD ADMIN) ---
+
+    public function guardar($name, $email, $password, $rol) {
+        // 1. Comprobamos que el email no exista ya
+        $query_check = "SELECT id FROM " . $this->table_name . " WHERE email = :email";
+        $stmt_check = $this->conn->prepare($query_check);
+        $stmt_check->bindParam(":email", $email);
+        $stmt_check->execute();
+        
+        if($stmt_check->rowCount() > 0) {
+            return false; // El correo ya existe
+        }
+
+        // 2. Insertamos con el rol que elija el admin
+        $query = "INSERT INTO " . $this->table_name . " (name, email, password, rol) VALUES (:name, :email, :password, :rol)";
+        $stmt = $this->conn->prepare($query);
+
+        $password_hashed = password_hash($password, PASSWORD_BCRYPT);
+
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":password", $password_hashed);
+        $stmt->bindParam(":rol", $rol);
+
+        return $stmt->execute();
+    }
+
+    public function getById($id) {
+        $query = "SELECT id, name, email, rol FROM " . $this->table_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function update($id, $name, $email, $rol, $password = null) {
+        if (!empty($password)) {
+            // Si el admin escribe contraseña nueva, la actualizamos
+            $query = "UPDATE " . $this->table_name . " SET name = :name, email = :email, rol = :rol, password = :password WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+            $password_hashed = password_hash($password, PASSWORD_BCRYPT);
+            $stmt->bindParam(":password", $password_hashed);
+        } else {
+            // Si la deja en blanco, actualizamos el resto
+            $query = "UPDATE " . $this->table_name . " SET name = :name, email = :email, rol = :rol WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+        }
+
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":rol", $rol);
+        $stmt->bindParam(":id", $id);
+
+        return $stmt->execute();
+    }
+
+    public function delete($id) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        return $stmt->execute();
+    }
 }
 ?>

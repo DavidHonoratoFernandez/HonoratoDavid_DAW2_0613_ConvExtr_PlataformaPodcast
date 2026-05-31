@@ -408,6 +408,14 @@ audio {
     background: #f59e0b;
 }
 
+.texto-oro {
+    color: #fbbf24;
+}
+.texto-centrado {
+    text-align: center;
+    padding: 2rem;
+}
+
 @media (max-width: 600px) {
     .grid-formulario {
         grid-template-columns: 1fr;
