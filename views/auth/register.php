@@ -2,26 +2,43 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro - Plataforma de Podcast</title>
+    <title>Registro - Podcast Platform</title>
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <h2>Crear Cuenta</h2>
-    
-    <?php if(isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <div class="contenedor contenedor-auth">
+        <div class="tarjeta tarjeta-auth">
+            <h2>Crear Cuenta</h2>
+            
+            <?php if (isset($error)): ?>
+                <div class="mensaje-error">
+                    <?= htmlspecialchars($error) ?>
+                </div>
+            <?php endif; ?>
 
-    <form action="index.php?controller=Auth&action=register" method="POST">
-        <label>Nombre:</label><br>
-        <input type="text" name="name" required><br><br>
+            <form action="index.php?controller=Auth&action=register" method="POST" class="formulario-auth">
+                <div class="grupo-input">
+                    <label for="nombre">Nombre de usuario</label>
+                    <input type="text" id="nombre" name="nombre" class="input-auth" required placeholder="Tu nombre">
+                </div>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-        
-        <label>Contraseña:</label><br>
-        <input type="password" name="password" required><br><br>
-        
-        <button type="submit">Registrarse</button>
-    </form>
-    
-    <p>¿Ya tienes cuenta? <a href="index.php?controller=Auth&action=login">Inicia sesión</a></p>
+                <div class="grupo-input">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" class="input-auth" required placeholder="tu@email.com">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" class="input-auth" required placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="boton boton-auth">Registrarse</button>
+            </form>
+
+            <a href="index.php?controller=Auth&action=login" class="enlace-auth">
+                ¿Ya tienes cuenta? <strong style="color: var(--color-primario);">Inicia sesión</strong>
+            </a>
+        </div>
+    </div>
 </body>
 </html>

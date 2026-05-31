@@ -1,0 +1,269 @@
+/* --- VARIABLES Y PALETAS DE COLOR --- */
+:root {
+    /* Forzamos los controles del navegador (como el <audio>) a modo oscuro */
+    color-scheme: dark; 
+
+    /* FONDO: Degradado Negro a Gris muy oscuro */
+    --color-fondo-inicio: #050505;
+    --color-fondo-fin: #171717;
+    
+    /* TARJETAS: Fondo casi transparente con borde sutil */
+    --fondo-tarjeta: rgba(255, 255, 255, 0.03); 
+    --borde-tarjeta: rgba(255, 255, 255, 0.08);
+    --borde-hover: rgba(255, 255, 255, 0.2);
+    
+    /* TEXTOS */
+    --texto-principal: #f9fafb;   /* Blanco casi puro */
+    --texto-secundario: #9ca3af;  /* Gris medio */
+    
+    /* 4. NEGRO Y BLANCO/PLATA  */
+    --color-primario: #ffffff;
+    --color-secundario: #9ca3af;
+    
+
+    /* --- DEGRADADO MAESTRO --- */
+    --gradiente-primario: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+}
+
+/* --- RESET Y ESTILOS BASE --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    /* Fondo con degradado sutil */
+    background: linear-gradient(to bottom right, var(--color-fondo-inicio), var(--color-fondo-fin));
+    color: var(--texto-principal);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primario);
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--texto-principal);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* --- ESTRUCTURA PRINCIPAL --- */
+.cabecera-principal {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borde-tarjeta);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.cabecera-principal h1 {
+    font-size: 1.4rem;
+    background: var(--gradiente-primario);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+h2, h3 {
+    font-weight: 600;
+}
+
+/* --- CATÁLOGO DE PODCASTS (GRID) --- */
+.cuadricula-podcasts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.tarjeta {
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primario);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tarjeta h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--texto-principal);
+}
+
+.tarjeta p {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Botón con degradado */
+.boton {
+    display: inline-block;
+    text-align: center;
+    background: var(--gradiente-primario);
+    color: #000000 !important; /* Texto negro sobre dorado/color queda genial */
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: auto; /* Empuja el botón al fondo de la tarjeta */
+    border: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.boton:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+    text-shadow: none;
+}
+
+/* --- VISTA DE EPISODIOS (show.php) --- */
+.lista-episodios {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.item-episodio {
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde-tarjeta);
+    border-left: 4px solid var(--color-primario); /* Detalle de color a la izquierda */
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: background 0.2s ease;
+}
+
+.item-episodio:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.item-episodio h4 {
+    font-size: 1.15rem;
+    color: var(--texto-principal);
+    margin-bottom: 0.4rem;
+}
+
+.info-episodio {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    margin-bottom: 1.2rem;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Reproductor HTML5 adaptado a fondo oscuro */
+audio {
+    width: 100%;
+    height: 45px;
+    border-radius: 25px;
+    outline: none;
+    background-color: transparent;
+}
+
+/* --- VISTAS DE AUTENTICACIÓN (LOGIN / REGISTRO) --- */
+.contenedor-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh; /* Centra verticalmente en la pantalla */
+}
+
+.tarjeta-auth {
+    width: 100%;
+    max-width: 420px; /* Ancho máximo del formulario */
+    text-align: center;
+    padding: 2.5rem 2rem;
+}
+
+.tarjeta-auth h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--texto-principal);
+}
+
+.formulario-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: left;
+}
+
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.grupo-input label {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    font-weight: 500;
+}
+
+.input-auth {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--borde-tarjeta);
+    color: var(--texto-principal);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-auth:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.boton-auth {
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.8rem;
+}
+
+.enlace-auth {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--texto-secundario);
+}
+
+/* --- ESTILO PARA MENSAJES DE ERROR --- */
+.mensaje-error {
+    color: #ef4444; 
+    background: rgba(239, 68, 68, 0.1); 
+    padding: 10px; 
+    border-radius: 6px; 
+    margin-bottom: 15px; 
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    text-align: center;
+    font-size: 0.9rem;
+}

@@ -1,63 +1,40 @@
 <?php
-// Arrancamos la gestión de sesiones nativa desde el minuto cero
+// Inicia sesión (usar `$_SESSION`)
 session_start();
 
-// 1. Definir Controlador y Acción por defecto
-// Si entramos a la web sin parámetros, por defecto cargará PodcastController y el método index
+// Controlador y acción (GET) — valores por defecto
 $controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'Podcast';
 $actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
 
-// 2. Formatear el nombre del archivo y la clase
-// Convertimos "podcast" en "PodcastController"
+// Nombre de clase y ruta del archivo del controlador
 $controllerClassName = ucfirst($controllerName) . 'Controller';
 $controllerFile = 'controllers/' . $controllerClassName . '.php';
 
-// 3. Comprobar si el archivo del controlador existe
+// Incluir controlador si existe
 if (file_exists($controllerFile)) {
-   
-    // Cargamos el archivo
     require_once $controllerFile;
 
-    // 4. Comprobar si la clase existe dentro de ese archivo
+    // Verificar clase y control de acceso
     if (class_exists($controllerClassName)) {
-
-        // Definimos qué páginas son públicas (donde se puede entrar sin estar logueado)
-        $paginasPublicas = ['Auth']; 
-
-        // Si el controlador NO es público y no hay sesión iniciada, mandamos al login
+        $paginasPublicas = ['Auth']; // controladores accesibles sin login
         if (!in_array($controllerName, $paginasPublicas) && !isset($_SESSION['user_id'])) {
-        
             header("Location: index.php?controller=Auth&action=login");
             exit();
-
         }
-        
-        // Instanciamos el controlador (ej: $controller = new PodcastController();)
+
+        // Instanciar y ejecutar acción si existe
         $controller = new $controllerClassName();
-
-        // 5. Comprobar si el método (la acción) existe en el controlador
         if (method_exists($controller, $actionName)) {
-        
-            // Llamamos a la función (ej: $controller->index();)
             $controller->$actionName();
-        
         } else {
-        
-            // Error 404 casero: La función no existe
             die("Error: La acción '$actionName' no existe en '$controllerClassName'.");
-        
         }
-    
+
     } else {
-    
-        // Error 404 casero: La clase no existe
         die("Error: La clase '$controllerClassName' no se encuentra.");
-
     }
+
 } else {
-
-    // Error 404 casero: El archivo no existe
     die("Error: El controlador '$controllerClassName' no existe en la carpeta controllers.");
-
 }
 ?>
