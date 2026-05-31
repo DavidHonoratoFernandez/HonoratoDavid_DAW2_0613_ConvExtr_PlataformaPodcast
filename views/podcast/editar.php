@@ -35,7 +35,7 @@
 
                 <div class="grupo-input full-width">
                     <label>Descripción</label>
-                    <textarea name="descripcion" class="input-auth" rows="4" required><?= htmlspecialchars($podcast['descripcion']) ?></textarea>
+                    <textarea name="descripcion" class="input-auth" rows="4"><?= htmlspecialchars($podcast['descripcion']) ?></textarea>
                 </div>
 
                 <div class="grupo-input full-width acciones-cabecera">

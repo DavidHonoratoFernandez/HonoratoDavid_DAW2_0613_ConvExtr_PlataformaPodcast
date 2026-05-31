@@ -19,12 +19,12 @@
             <form action="index.php?controller=Auth&action=login" method="POST" class="formulario-auth">
                 <div class="grupo-input">
                     <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" class="input-auth" required placeholder="tu@email.com">
+                    <input type="email" id="email" name="email" class="input-auth" placeholder="tu@email.com">
                 </div>
 
                 <div class="grupo-input">
                     <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" class="input-auth" required placeholder="••••••••">
+                    <input type="password" id="password" name="password" class="input-auth" placeholder="••••••••">
                 </div>
 
                 <button type="submit" class="boton boton-auth">Entrar</button>
