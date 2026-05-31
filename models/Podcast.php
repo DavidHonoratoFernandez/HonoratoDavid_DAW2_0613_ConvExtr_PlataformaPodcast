@@ -21,6 +21,14 @@ class Podcast {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getForSelect() {
+        $query = "SELECT id_podcast, titulo FROM " . $this->table_name . " ORDER BY titulo ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // --- OBTENER UN PODCAST POR SU ID ---
     public function getById($id) {
 

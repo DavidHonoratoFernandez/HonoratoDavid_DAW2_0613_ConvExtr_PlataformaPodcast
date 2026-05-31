@@ -14,8 +14,8 @@
 
         <div class="menu-interno-admin">
             <a href="index.php?controller=Admin&action=index" class="boton">Podcasts</a>
-            <a href="index.php?controller=Admin&action=usuarios" class="boton">Usuarios</a>
-            <a href="index.php?controller=Admin&action=episodios" class="boton">Episodios</a>
+            <a href="index.php?controller=Admin&action=usuarios" class="boton-secundario">Usuarios</a>
+            <a href="index.php?controller=Admin&action=episodios" class="boton-secundario">Episodios</a>
         </div>
 
         <div class="panel-gestion">

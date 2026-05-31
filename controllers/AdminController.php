@@ -17,5 +17,21 @@ class AdminController {
         // 3. Cargamos la vista desde tu NUEVA carpeta
         require_once 'views/admin/dashboard.php';
     }
+    
+    public function episodios() {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+            header("Location: index.php");
+            exit();
+        }
+        
+        require_once 'models/Episodio.php';
+        $episodioModel = new Episodio();
+        
+        $stmt = $episodioModel->conn->query("SELECT * FROM tbl_episodio ORDER BY id_episodio DESC");
+        $episodios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Apuntamos a tu nueva estructura de carpetas
+        require_once 'views/admin/episodio/index.php';
+    }
 }
 ?>
