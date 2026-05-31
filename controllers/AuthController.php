@@ -23,7 +23,7 @@ class AuthController {
                 // ¡Login exitoso! Guardamos los datos nativos de la sesión
                 $_SESSION['user_id'] = $loggedUser['id'];
                 $_SESSION['user_name'] = $loggedUser['name'];
-                $_SESSION['user_role'] = $loggedUser['role'];
+                $_SESSION['rol'] = $loggedUser['rol'];
 
                 // Redirigimos al catálogo privado de podcasts
                 header("Location: index.php?controller=Podcast&action=index");
@@ -42,7 +42,7 @@ class AuthController {
     // --- FUNCIÓN DE REGISTRO ---
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = trim($_POST['name']);
+            $name = trim($_POST['nombre']);
             $email = trim($_POST['email']);
             $password = $_POST['password'];
 

@@ -45,5 +45,103 @@ class PodcastController {
             exit();
         }
     }
+
+    // --- MÉTODOS DEL CRUD (Solo Admin) ---
+    public function crear() {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+            header("Location: index.php?controller=Podcast&action=index");
+            exit();
+        }
+        require 'views/podcast/crear.php';
+    }
+
+    public function guardar() {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+            header("Location: index.php?controller=Podcast&action=index");
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $titulo = trim($_POST['titulo'] ?? '');
+            $creador = trim($_POST['creador'] ?? '');
+            $descripcion = trim($_POST['descripcion'] ?? '');
+            $categoria = trim($_POST['categoria'] ?? '');
+            $portada = trim($_POST['portada'] ?? '');
+
+            if (empty($titulo) || empty($creador) || empty($descripcion) || empty($categoria) || empty($portada)) {
+                $error = "Todos los campos son obligatorios.";
+                require 'views/podcast/crear.php';
+                return;
+            }
+
+            $podcast = new Podcast();
+            $podcast->guardar($titulo, $creador, $descripcion, $categoria, $portada);
+            header("Location: index.php?controller=Admin&action=index");
+            exit();
+        }
+    }
+
+    public function editar() {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+            header("Location: index.php?controller=Podcast&action=index");
+            exit();
+        }
+
+        if (!isset($_GET['id'])) {
+            header("Location: index.php?controller=Admin&action=index");
+            exit();
+        }
+
+        $id = $_GET['id'];
+        $podcastModel = new Podcast();
+        $podcast = $podcastModel->getById($id);
+
+        if ($podcast) {
+            require 'views/podcast/editar.php';
+        } else {
+            header("Location: index.php?controller=Admin&action=index");
+            exit();
+        }
+    }
+
+    public function actualizar() {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+            header("Location: index.php?controller=Podcast&action=index");
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id_podcast'];
+            $titulo = trim($_POST['titulo'] ?? '');
+            $creador = trim($_POST['creador'] ?? '');
+            $descripcion = trim($_POST['descripcion'] ?? '');
+            $categoria = trim($_POST['categoria'] ?? '');
+            $portada = trim($_POST['portada'] ?? '');
+
+            $podcastModel = new Podcast();
+            $podcastModel->update($id, $titulo, $creador, $descripcion, $categoria, $portada);
+            
+            header("Location: index.php?controller=Admin&action=index");
+            exit();
+        }
+    }
+
+    public function eliminar() {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+            header("Location: index.php?controller=Podcast&action=index");
+            exit();
+        }
+
+        if (!isset($_GET['id'])) {
+            header("Location: index.php?controller=Admin&action=index");
+            exit();
+        }
+
+        $id = $_GET['id'];
+        $podcastModel = new Podcast();
+        $podcastModel->delete($id);
+        header("Location: index.php?controller=Admin&action=index");
+        exit();
+    }
 }
 ?>

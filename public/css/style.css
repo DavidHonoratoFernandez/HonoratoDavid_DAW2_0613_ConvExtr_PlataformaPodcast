@@ -141,6 +141,29 @@ h2, h3 {
     text-shadow: none;
 }
 
+/* --- BOTÓN SECUNDARIO (CANCELAR) --- */
+.boton-secundario {
+    background: transparent;
+    border: 1px solid var(--borde-tarjeta);
+    color: var(--texto-secundario);
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.boton-secundario:hover {
+    border-color: var(--texto-principal);
+    color: var(--texto-principal);
+    background: rgba(255, 255, 255, 0.05);
+}
+
 /* --- VISTA DE EPISODIOS (show.php) --- */
 .lista-episodios {
     list-style: none;
@@ -195,7 +218,7 @@ audio {
 
 .tarjeta-auth {
     width: 100%;
-    max-width: 420px; /* Ancho máximo del formulario */
+    max-width: 700px; /* Ancho máximo del formulario */
     text-align: center;
     padding: 2.5rem 2rem;
 }
@@ -256,6 +279,18 @@ audio {
     color: var(--texto-secundario);
 }
 
+.grid-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 1.5rem;
+    text-align: left;
+}
+
+/* Clases para elementos que deben ocupar el ancho completo */
+.full-width {
+    grid-column: span 2;
+}
+
 /* --- ESTILO PARA MENSAJES DE ERROR --- */
 .mensaje-error {
     color: #ef4444; 
@@ -266,4 +301,118 @@ audio {
     border: 1px solid rgba(239, 68, 68, 0.3);
     text-align: center;
     font-size: 0.9rem;
+}
+
+/* --- ACCIONES DE CABECERA (Header) --- */
+.acciones-cabecera {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.boton-pequeno {
+    margin: 0;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+}
+
+.enlace-logout {
+    color: #ef4444;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.enlace-logout:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* --- PANEL DE ADMINISTRACIÓN --- */
+.menu-interno-admin {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.panel-gestion {
+    background: var(--fondo-tarjeta);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--borde-tarjeta);
+}
+
+.cabecera-gestion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.cabecera-gestion h2 {
+    margin: 0;
+}
+
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabla-admin thead tr {
+    border-bottom: 2px solid var(--borde-tarjeta);
+}
+
+.tabla-admin th {
+    padding: 0.75rem;
+    color: var(--texto-secundario);
+}
+
+.tabla-admin tbody tr {
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.tabla-admin td {
+    padding: 0.75rem;
+}
+
+.alinear-derecha {
+    text-align: right;
+}
+
+.texto-bold {
+    font-weight: bold;
+}
+
+.enlace-eliminar {
+    color: #ef4444;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.enlace-eliminar:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Botón especial para entrar al admin */
+.boton-oro {
+    background: #fbbf24;
+    color: black;
+    font-weight: bold;
+}
+
+.boton-oro:hover {
+    background: #f59e0b;
+}
+
+@media (max-width: 600px) {
+    .grid-formulario {
+        grid-template-columns: 1fr;
+    }
+    .full-width {
+        grid-column: span 1;
+    }
 }

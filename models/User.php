@@ -27,7 +27,7 @@ class User {
         }
 
         // 2. Si no existe, preparamos el INSERT
-        $query = "INSERT INTO " . $this->table_name . " (name, email, password, role) VALUES (:name, :email, :password, 'client')";
+        $query = "INSERT INTO " . $this->table_name . " (name, email, password, rol) VALUES (:name, :email, :password, 'client')";
         $stmt = $this->conn->prepare($query);
 
         // 3. Encriptamos la contraseña con bcrypt
@@ -49,7 +49,7 @@ class User {
     public function login($email, $password) {
 
         // 1. Buscamos al usuario por su email
-        $query = "SELECT id, name, email, password, role FROM " . $this->table_name . " WHERE email = :email LIMIT 0,1";
+        $query = "SELECT id, name, email, password, rol FROM " . $this->table_name . " WHERE email = :email LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":email", $email);
         $stmt->execute();

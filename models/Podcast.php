@@ -21,6 +21,14 @@ class Podcast {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getForSelect() {
+        $query = "SELECT id_podcast, titulo FROM " . $this->table_name . " ORDER BY titulo ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // --- OBTENER UN PODCAST POR SU ID ---
     public function getById($id) {
 
@@ -42,5 +50,13 @@ class Podcast {
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve varios registros
     }
+
+    // --- GUARDAR UN NUEVO PODCAST ---
+    public function guardar($titulo, $creador, $descripcion, $categoria, $portada) {
+    $sql = "INSERT INTO tbl_podcast (titulo, creador, descripcion, categoria, portada) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([$titulo, $creador, $descripcion, $categoria, $portada]);
+    
+}
 }
 ?>

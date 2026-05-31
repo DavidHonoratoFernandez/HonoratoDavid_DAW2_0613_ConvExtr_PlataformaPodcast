@@ -13,7 +13,12 @@ $userName = $_SESSION['user_name'] ?? '';
 <body>
     <header class="cabecera-principal">
         <h1>Bienvenido, <?= htmlspecialchars($userName) ?></h1>
-        <a href="index.php?controller=Auth&action=logout" style="color: #ef4444; font-weight: bold;">Cerrar Sesión</a>
+        <div class="acciones-cabecera">
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                <a href="index.php?controller=Admin&action=index" class="boton boton-pequeno boton-oro">Panel Admin</a>
+            <?php endif; ?>
+            <a href="index.php?controller=Auth&action=logout" class="enlace-logout">Cerrar Sesión</a>
+        </div>
     </header>
 
     <div class="contenedor">
