@@ -13,7 +13,10 @@ $userName = $_SESSION['user_name'] ?? '';
 <body>
     <header class="cabecera-principal">
         <h1>Bienvenido, <?= htmlspecialchars($userName) ?></h1>
-        <a href="index.php?controller=Auth&action=logout" style="color: #ef4444; font-weight: bold;">Cerrar Sesión</a>
+        <div class="acciones-cabecera">
+            <a href="index.php?controller=Podcast&action=crear" class="boton boton-pequeno">+ Nuevo Podcast</a>
+            <a href="index.php?controller=Auth&action=logout" class="enlace-logout">Cerrar Sesión</a>
+        </div>
     </header>
 
     <div class="contenedor">

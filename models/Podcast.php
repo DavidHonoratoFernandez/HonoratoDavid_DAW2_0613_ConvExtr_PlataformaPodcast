@@ -42,5 +42,13 @@ class Podcast {
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve varios registros
     }
+
+    // --- GUARDAR UN NUEVO PODCAST ---
+    public function guardar($titulo, $creador, $descripcion, $categoria, $portada) {
+    $sql = "INSERT INTO tbl_podcast (titulo, creador, descripcion, categoria, portada) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([$titulo, $creador, $descripcion, $categoria, $portada]);
+    
+}
 }
 ?>

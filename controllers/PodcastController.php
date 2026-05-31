@@ -45,5 +45,29 @@ class PodcastController {
             exit();
         }
     }
+
+    /// --- CREAR NUEVO PODCAST (FORMULARIO) ---
+    public function crear() {
+        require_once 'views/podcast/crear.php';
+    }
+
+    public function guardar() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $titulo = $_POST['titulo'];
+            $creador = $_POST['creador'];
+            $descripcion = $_POST['descripcion'];
+            $categoria = $_POST['categoria'];
+
+            // Por ahora guardamos el nombre de la imagen, luego gestionaremos la subida
+            $portada = $_POST['portada']; 
+
+            $podcast = new Podcast();
+            $podcast->guardar($titulo, $creador, $descripcion, $categoria, $portada);
+
+            // Redirigimos al catálogo tras guardar
+            header("Location: index.php?controller=Podcast&action=index");
+            exit();
+        }
+    }
 }
 ?>

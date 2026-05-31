@@ -141,6 +141,29 @@ h2, h3 {
     text-shadow: none;
 }
 
+/* --- BOTÓN SECUNDARIO (CANCELAR) --- */
+.boton-secundario {
+    background: transparent;
+    border: 1px solid var(--borde-tarjeta);
+    color: var(--texto-secundario);
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.boton-secundario:hover {
+    border-color: var(--texto-principal);
+    color: var(--texto-principal);
+    background: rgba(255, 255, 255, 0.05);
+}
+
 /* --- VISTA DE EPISODIOS (show.php) --- */
 .lista-episodios {
     list-style: none;
@@ -195,7 +218,7 @@ audio {
 
 .tarjeta-auth {
     width: 100%;
-    max-width: 420px; /* Ancho máximo del formulario */
+    max-width: 700px; /* Ancho máximo del formulario */
     text-align: center;
     padding: 2.5rem 2rem;
 }
@@ -256,6 +279,18 @@ audio {
     color: var(--texto-secundario);
 }
 
+.grid-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 1.5rem;
+    text-align: left;
+}
+
+/* Clases para elementos que deben ocupar el ancho completo */
+.full-width {
+    grid-column: span 2;
+}
+
 /* --- ESTILO PARA MENSAJES DE ERROR --- */
 .mensaje-error {
     color: #ef4444; 
@@ -266,4 +301,38 @@ audio {
     border: 1px solid rgba(239, 68, 68, 0.3);
     text-align: center;
     font-size: 0.9rem;
+}
+
+/* --- ACCIONES DE CABECERA (Header) --- */
+.acciones-cabecera {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.boton-pequeno {
+    margin: 0;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+}
+
+.enlace-logout {
+    color: #ef4444;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.enlace-logout:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    .grid-formulario {
+        grid-template-columns: 1fr;
+    }
+    .full-width {
+        grid-column: span 1;
+    }
 }
