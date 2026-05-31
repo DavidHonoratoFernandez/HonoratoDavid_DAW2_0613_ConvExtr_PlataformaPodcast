@@ -184,3 +184,86 @@ audio {
     outline: none;
     background-color: transparent;
 }
+
+/* --- VISTAS DE AUTENTICACIÓN (LOGIN / REGISTRO) --- */
+.contenedor-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh; /* Centra verticalmente en la pantalla */
+}
+
+.tarjeta-auth {
+    width: 100%;
+    max-width: 420px; /* Ancho máximo del formulario */
+    text-align: center;
+    padding: 2.5rem 2rem;
+}
+
+.tarjeta-auth h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--texto-principal);
+}
+
+.formulario-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: left;
+}
+
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.grupo-input label {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    font-weight: 500;
+}
+
+.input-auth {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--borde-tarjeta);
+    color: var(--texto-principal);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-auth:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.boton-auth {
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.8rem;
+}
+
+.enlace-auth {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--texto-secundario);
+}
+
+/* --- ESTILO PARA MENSAJES DE ERROR --- */
+.mensaje-error {
+    color: #ef4444; 
+    background: rgba(239, 68, 68, 0.1); 
+    padding: 10px; 
+    border-radius: 6px; 
+    margin-bottom: 15px; 
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    text-align: center;
+    font-size: 0.9rem;
+}
